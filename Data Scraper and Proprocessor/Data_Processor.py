@@ -25,7 +25,7 @@ class Data_Processor:
         self._stemmer = stemmer()
         self._lemma = lemma()
         self._stopwords = set(nltk.corpus.stopwords.words('english')).union(
-            set(['http', 'via', 'ha', 'We', 'I', 'make', 'today', 'A', 'the', 'http', 'one']))
+            set(['http', 'via', 'ha', 'We', 'I', 'make', 'today', 'A', 'the', 'http', 'one','This','LLC','Inc']))
 
     def DateList(self):
         start_year = int(self._S_m[:4])
@@ -40,7 +40,7 @@ class Data_Processor:
         start_year_month_range = range(start_month, 13)
         end_year_month_range = range(1, end_month + 1)
         date_list = ["{year}-{month:0=2d}".format(year=str(start_year), month=M) for M in start_year_month_range]
-        date_list += ["{year}-{month:0=2d}".format(year=str(Y), month=M) for Y in year_range for M in range(13)]
+        date_list += ["{year}-{month:0=2d}".format(year=str(Y), month=M) for Y in year_range for M in range(1,13)]
         date_list += ["{year}-{month:0=2d}".format(year=str(end_year), month=M) for M in end_year_month_range]
         return date_list
 

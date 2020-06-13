@@ -74,6 +74,7 @@ class Data_Processor:
         self._Lens = []
         for i in self._M_data:
             self._Lens.append(len(i))
+        self._text = [[_['text'] for _ in D] for D in self._M_data]
 
     @property
     def Data(self):

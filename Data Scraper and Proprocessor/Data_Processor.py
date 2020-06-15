@@ -1,10 +1,12 @@
 import json
 import nltk
 import numpy as np
+
 nltk.download('wordnet')
 nltk.download('punkt')
 from nltk.corpus import stopwords
 from nltk.util import ngrams
+
 nltk.download('stopwords')
 from nltk.tokenize import TweetTokenizer
 import re
@@ -12,10 +14,11 @@ from nltk.stem.snowball import SnowballStemmer
 from gensim.parsing.preprocessing import STOPWORDS
 import gensim
 import matplotlib.pyplot as plt
-from wordcloud import WordCloud,STOPWORDS
+from wordcloud import WordCloud, STOPWORDS
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from collections import Iterable
+
 
 class Data_Processor:
 
@@ -24,19 +27,19 @@ class Data_Processor:
                  lemma=nltk.wordnet.WordNetLemmatizer):
         self._S_m = start_month
         self._E_m = end_month
-        self._D_list = self.DateList()
+        self._D_list = self.datelist()
         self._Dir = template
-        self.Data = []
+        self.data = []
         self._text = []
         self._Lens = []
         self._tokenizer = tokenizer
         self._stemmer = stemmer()
         self._lemma = lemma()
         self._stopwords = set(nltk.corpus.stopwords.words('english')).union(
-            set(['http', 'via', 'ha', 'We', 'I', 'make', 'today', 'A', 'the', 'http', 'one','This','LLC','Inc']))
-        self._unigrams=[]
+            set(['http', 'via', 'ha', 'We', 'I', 'make', 'today', 'A', 'the', 'http', 'one', 'This', 'LLC', 'Inc']))
+        self._unigrams = []
 
-    def DateList(self):
+    def datelist(self):
         start_year = int(self._S_m[:4])
         start_month = int(self._S_m[-2:])
         end_year = int(self._E_m[:4])
@@ -49,11 +52,11 @@ class Data_Processor:
         start_year_month_range = range(start_month, 13)
         end_year_month_range = range(1, end_month + 1)
         date_list = ["{year}-{month:0=2d}".format(year=str(start_year), month=M) for M in start_year_month_range]
-        date_list += ["{year}-{month:0=2d}".format(year=str(Y), month=M) for Y in year_range for M in range(1,13)]
+        date_list += ["{year}-{month:0=2d}".format(year=str(Y), month=M) for Y in year_range for M in range(1, 13)]
         date_list += ["{year}-{month:0=2d}".format(year=str(end_year), month=M) for M in end_year_month_range]
         return date_list
 
-    def ReadData(self):
+    def readdata(self):
         for date in self._D_list:
             with open("{dir}{D}.json".format(dir=self._Dir, D=date), "r") as read_file:
                 foo = "self.data" + date[:4] + date[5:7]
@@ -63,10 +66,10 @@ class Data_Processor:
             self._Lens.append(len(i))
         self._text = [[_['text'] for _ in D] for D in self._M_data]
 
-    def DataNums(self):
+    def datanums(self):
         return self._Lens, sum(self._Lens)
 
-    def Specify_Lang(self, lang='"en"'):
+    def specifylang(self, lang='"en"'):
         self._M_data = [[_ for _ in D if
                          _['text_html'][
                          _['text_html'].find('lang='):_['text_html'].find('lang=') + 9] == 'lang=' + lang]
@@ -77,24 +80,27 @@ class Data_Processor:
         self._text = [[_['text'] for _ in D] for D in self._M_data]
 
     @property
-    def Data(self):
+    def data(self):
         return self._M_data
 
-    @Data.setter
-    def Data(self,data):
-        self._M_data=data
-        self._Lens=[]
+    @data.setter
+    def data(self, data):
+        self._M_data = data
+        self._Lens = []
         for i in self._M_data:
             self._Lens.append(len(i))
         self._text = [[_['text'] for _ in D] for D in self._M_data]
 
-    def TextData(self):
+    def textdata(self):
         return self._text
 
-    def GetNGrams(self, num, lemma=False, stem=False):
-        return [[self._extract_ngrams(_, num, lemma, stem) for _ in M] for M in self._text]
+    def getngrams(self, data=None, num=1, lemma=True, stem=False):
+        if not data:
+            return [[self._extract_ngrams(_, num, lemma, stem) for _ in M] for M in self._text]
+        else:
+            return self._extract_ngrams(data, num, lemma, stem)
 
-    def GetFreq(self, ngrams):
+    def getfreq(self, ngrams):
         words_freq = {}
         for month in ngrams:
             for text in month:
@@ -107,9 +113,10 @@ class Data_Processor:
         words_freq_list = sorted(words_freq_list, key=lambda x: x[1], reverse=True)
         return words_freq_list
 
-    def WordCloud(self, ngrams,Width=3200,Height=1600,Max_Font_Size=160,Max_Words=1000):
-        sentence=' '.join([' '.join([' '.join(T) for T in month]) for month in ngrams])
-        wordcloud = WordCloud(width=Width, height=Height, max_font_size=Max_Font_Size, stopwords=STOPWORDS, max_words=Max_Words).generate(
+    def wordcld(self, ngrams, Width=3200, Height=1600, Max_Font_Size=160, Max_Words=1000):
+        sentence = ' '.join([' '.join([' '.join(T) for T in month]) for month in ngrams])
+        wordcloud = WordCloud(width=Width, height=Height, max_font_size=Max_Font_Size, stopwords=STOPWORDS,
+                              max_words=Max_Words).generate(
             sentence)
         plt.figure(figsize=(20, 10))
         plt.imshow(wordcloud, interpolation='bicubic')
@@ -117,15 +124,15 @@ class Data_Processor:
         plt.tight_layout(pad=0)
         plt.show()
 
-    def AddStopwords(self,words):
-        addon=[i for i in words]
-        self._stopwords+=addon
+    def addstopwords(self, words):
+        addon = [i for i in words]
+        self._stopwords += addon
 
-    def Clean(self):
+    def clean(self):
         self._remove_link()
         self._remove_sign()
 
-    def TFIDF(self,ngrams):
+    def tfidf(self, ngrams):
         T = [[' '.join(T) for T in month] for month in ngrams]
         R = []
         for i in T:
@@ -144,16 +151,16 @@ class Data_Processor:
                 if '/' in twt['text']:
                     result = re.sub(r"(https|http)\S+", "", twt['text'])
                     # result=re.sub(r'(https|http)?:\/(\w|\.|\/|\?|\=|\&|\%)*\b','',i['text'])
-                    result = re.sub(r"\S+.com\S+", "", result)
+                    result = re.sub(r"\S+\.com\S+", "", result)
                     twt['text'] = result
         self._text = [[_['text'] for _ in D] for D in self._M_data]
 
     def _remove_sign(self):
         for month in self._M_data:
             for twt in month:
-                #hash tag
+                # hash tag
                 result = re.sub(r'#\S+', '', twt['text'])
-                result=re.sub(r'.ealth .anagement','',result)
+                result = re.sub(r'.ealth .anagement', '', result)
                 # user mention
                 # result=re.sub(r'#\S+', '', result)
                 # emoji
@@ -165,7 +172,7 @@ class Data_Processor:
                 # punctuation
                 from string import punctuation as punc
                 result = re.sub('[{}]'.format(punc), '', result)
-                result=''.join([i for i in result if i.isnumeric()==False])
+                result = ''.join([i for i in result if i.isnumeric() == False])
                 twt['text'] = result
         self._text = [[_['text'] for _ in D] for D in self._M_data]
 
@@ -185,3 +192,28 @@ class Data_Processor:
             n_grams = ngrams(token_stop_lemma_alnum, num)
 
         return [''.join(grams) for grams in n_grams]
+
+
+def clean(Data):
+    def C(string):
+        result = re.sub(r"(https|http)\S+", "", string)
+        result = re.sub(r"\S+\.com\S+", "", result)
+        result = re.sub(r'#\S+', '', result)
+        result = re.sub(r'.ealth .anagement', '', result)
+        result = re.sub(r'[^\x00-\x7F]+', '', result)
+        result = re.sub(r'<.*?>', '', result)
+        result = re.sub(r' +', ' ', result)
+        from string import punctuation as punc
+        result = re.sub('[{}]'.format(punc), '', result)
+        result = ''.join([i for i in result if i.isnumeric() == False])
+        return result
+
+    if isinstance(Data[0], str):
+        for i in range(len(Data)):
+            Data[i] = C(Data[i])
+    else:
+        for m in range(len(Data)):
+            for i in range(len(Data[m])):
+                Data[m][i] = C(Data[m][i])
+
+    return Data

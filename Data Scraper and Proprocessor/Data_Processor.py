@@ -56,15 +56,14 @@ class Data_Processor:
         date_list += ["{year}-{month:0=2d}".format(year=str(end_year), month=M) for M in end_year_month_range]
         return date_list
 
+
     def readdata(self):
         for date in self._D_list:
             with open("{dir}{D}.json".format(dir=self._Dir, D=date), "r") as read_file:
                 foo = "self.data" + date[:4] + date[5:7]
                 exec(foo + " = json.load(read_file)")
                 exec('self._M_data.append(' + foo + ')')
-        for i in self._M_data:
-            self._Lens.append(len(i))
-        self._text = [[_['text'] for _ in D] for D in self._M_data]
+        self._recalc()
 
     def datanums(self):
         return self._Lens, sum(self._Lens)
@@ -128,9 +127,25 @@ class Data_Processor:
         addon = [i for i in words]
         self._stopwords += addon
 
+    def removenoise(self):
+        temp=[]
+        other=[]
+        for data in self._M_data:
+            temp.append([])
+            other.append([])
+            for i in data:
+                if i['retweets'] > 0 or i['likes'] > 0 or i['is_replied'] or i['is_reply_to'] or i['replies']:
+                    temp[-1].append(i)
+                else:
+                    other[-1].append(i)
+        self._M_data=temp
+        self._recalc()
+        return other
+
     def clean(self):
         self._remove_link()
         self._remove_sign()
+        self._dejob()
 
     def tfidf(self, ngrams):
         T = [[' '.join(T) for T in month] for month in ngrams]
@@ -153,7 +168,19 @@ class Data_Processor:
                     # result=re.sub(r'(https|http)?:\/(\w|\.|\/|\?|\=|\&|\%)*\b','',i['text'])
                     result = re.sub(r"\S+\.com\S+", "", result)
                     twt['text'] = result
+        self._recalc()
+
+    def _recalc(self):
+        self._Lens = []
+        for i in self._M_data:
+            self._Lens.append(len(i))
         self._text = [[_['text'] for _ in D] for D in self._M_data]
+
+    def _dejob(self):
+        self._M_data = [[_ for _ in D if
+                         'job' not in _['username'].lower()]
+                        for D in self._M_data]
+        self._recalc()
 
     def _remove_sign(self):
         for month in self._M_data:
@@ -174,7 +201,7 @@ class Data_Processor:
                 result = re.sub('[{}]'.format(punc), '', result)
                 result = ''.join([i for i in result if i.isnumeric() == False])
                 twt['text'] = result
-        self._text = [[_['text'] for _ in D] for D in self._M_data]
+        self._recalc()
 
     def _extract_ngrams(self, data, num, lemma=False, stem=False):
         tokens = self._tokenizer.tokenize(data)

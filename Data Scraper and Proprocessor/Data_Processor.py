@@ -22,7 +22,7 @@ from collections import Iterable
 
 class Data_Processor:
 
-    def __init__(self, start_month='2010-06', end_month='2020-06', template="/Users/ethan_bao/Wealth_Management",
+    def __init__(self, start_month='2010-06', end_month='2020-06', template=["/Users/ethan_bao/Wealth_Management"],
                  tokenizer=TweetTokenizer(strip_handles=True, reduce_len=True), stemmer=nltk.stem.porter.PorterStemmer,
                  lemma=nltk.wordnet.WordNetLemmatizer):
         self._S_m = start_month
@@ -30,7 +30,7 @@ class Data_Processor:
         self._D_list = self.datelist()
         self._Dir = template
         self.data = []
-        self._text = []
+        self._text = {}
         self._Lens = []
         self._tokenizer = tokenizer
         self._stemmer = stemmer()
@@ -58,12 +58,13 @@ class Data_Processor:
 
     def readdata(self):
         for date in self._D_list:
-            with open("{dir}{D}.json".format(dir=self._Dir, D=date), "r") as read_file:
-                foo = "self.data" + date[:4] + date[5:7]
-                exec(foo + " = json.load(read_file)")
-                exec('self._M_data.append(' + foo + ')')
+            month = []
+            for key in self._Dir:
+                with open("{dir}{D}.json".format(dir=key, D=date), "r") as read_file:
+                    temp = json.load(read_file)
+                    month += temp
+            self._M_data.append(month)
         self._recalc()
-
 
     def datanums(self):
         return self._Lens, sum(self._Lens)
@@ -84,13 +85,12 @@ class Data_Processor:
         self._M_data = data
         self._recalc()
 
-
     def textdata(self):
         return self._text
 
-    def getngrams(self, data=None, num=1, lemma=True, stem=False):
-        if not data:
-            return [[self._extract_ngrams(_, num, lemma, stem) for _ in M] for M in self._text]
+    def getngrams(self, data=float('inf'), num=1, lemma=True, stem=False):
+        if data == float('inf'):
+            return [[self._extract_ngrams(_, num, lemma, stem) for _ in M] for nonuse, M in self._text.items()]
         else:
             return self._extract_ngrams(data, num, lemma, stem)
 
@@ -142,6 +142,7 @@ class Data_Processor:
         self._remove_sign()
         self._dejob()
         self._remove_dup()
+        self._recalc()
 
     def tfidf(self, ngrams):
         T = [[' '.join(T) for T in month] for month in ngrams]
@@ -156,6 +157,15 @@ class Data_Processor:
         )
         return DF
 
+    def tokenizetext(self, Lemma=True):
+        for i in range(len(self._M_data)):
+            month = self._D_list[i]
+            data = self._M_data[i]
+            for j in data:
+                j['text'] = ' '.join(self.getngrams(data=j['text'], num=1, lemma=Lemma))
+            self._M_data[i] = data
+        self._recalc()
+
     def _remove_link(self):
         for month in self._M_data:
             for twt in month:
@@ -164,19 +174,19 @@ class Data_Processor:
                     # result=re.sub(r'(https|http)?:\/(\w|\.|\/|\?|\=|\&|\%)*\b','',i['text'])
                     result = re.sub(r"\S+\.com\S+", "", result)
                     twt['text'] = result
-        self._recalc()
 
     def _recalc(self):
         self._Lens = []
         for i in self._M_data:
             self._Lens.append(len(i))
-        self._text = [[_['text'] for _ in D] for D in self._M_data]
+        self._text = {}
+        for i in range(len(self._M_data)):
+            self._text[self._D_list[i]] = [_['text'] for _ in self._M_data[i]]
 
     def _dejob(self):
         self._M_data = [[_ for _ in D if
                          'job' not in _['username'].lower()]
                         for D in self._M_data]
-        self._recalc()
 
     def _remove_sign(self):
         for month in self._M_data:
@@ -197,7 +207,6 @@ class Data_Processor:
                 result = re.sub('[{}]'.format(punc), '', result)
                 result = ''.join([i for i in result if i.isnumeric() == False])
                 twt['text'] = result
-        self._recalc()
 
     def _extract_ngrams(self, data, num, lemma=False, stem=False):
         tokens = self._tokenizer.tokenize(data)
@@ -227,7 +236,6 @@ class Data_Processor:
             for ele in sorted(removed_index, reverse=True):
                 del m[ele]
         self._M_data = D
-        self._recalc()
 
 
 def clean(Data):

@@ -56,7 +56,6 @@ class Data_Processor:
         date_list += ["{year}-{month:0=2d}".format(year=str(end_year), month=M) for M in end_year_month_range]
         return date_list
 
-
     def readdata(self):
         for date in self._D_list:
             with open("{dir}{D}.json".format(dir=self._Dir, D=date), "r") as read_file:
@@ -64,6 +63,7 @@ class Data_Processor:
                 exec(foo + " = json.load(read_file)")
                 exec('self._M_data.append(' + foo + ')')
         self._recalc()
+
 
     def datanums(self):
         return self._Lens, sum(self._Lens)
@@ -73,10 +73,7 @@ class Data_Processor:
                          _['text_html'][
                          _['text_html'].find('lang='):_['text_html'].find('lang=') + 9] == 'lang=' + lang]
                         for D in self._M_data]
-        self._Lens = []
-        for i in self._M_data:
-            self._Lens.append(len(i))
-        self._text = [[_['text'] for _ in D] for D in self._M_data]
+        self._recalc()
 
     @property
     def data(self):
@@ -85,10 +82,8 @@ class Data_Processor:
     @data.setter
     def data(self, data):
         self._M_data = data
-        self._Lens = []
-        for i in self._M_data:
-            self._Lens.append(len(i))
-        self._text = [[_['text'] for _ in D] for D in self._M_data]
+        self._recalc()
+
 
     def textdata(self):
         return self._text
@@ -128,8 +123,8 @@ class Data_Processor:
         self._stopwords += addon
 
     def removenoise(self):
-        temp=[]
-        other=[]
+        temp = []
+        other = []
         for data in self._M_data:
             temp.append([])
             other.append([])
@@ -138,7 +133,7 @@ class Data_Processor:
                     temp[-1].append(i)
                 else:
                     other[-1].append(i)
-        self._M_data=temp
+        self._M_data = temp
         self._recalc()
         return other
 
@@ -146,6 +141,7 @@ class Data_Processor:
         self._remove_link()
         self._remove_sign()
         self._dejob()
+        self._remove_dup()
 
     def tfidf(self, ngrams):
         T = [[' '.join(T) for T in month] for month in ngrams]
@@ -219,6 +215,19 @@ class Data_Processor:
             n_grams = ngrams(token_stop_lemma_alnum, num)
 
         return [''.join(grams) for grams in n_grams]
+
+    def _remove_dup(self):
+        D = self._M_data
+        for m in D:
+            removed_index = []
+            for i in range(len(m)):
+                for j in range(i + 1, len(m)):
+                    if m[i]['tweet_id'] == m[j]['tweet_id']:
+                        removed_index.append(j)
+            for ele in sorted(removed_index, reverse=True):
+                del m[ele]
+        self._M_data = D
+        self._recalc()
 
 
 def clean(Data):

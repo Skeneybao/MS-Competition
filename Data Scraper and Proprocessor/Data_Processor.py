@@ -38,6 +38,8 @@ class Data_Processor:
         self._stopwords = set(nltk.corpus.stopwords.words('english')).union(
             set(['http', 'via', 'ha', 'We', 'I', 'make', 'today', 'A', 'the', 'http', 'one', 'This', 'LLC', 'Inc']))
         self._unigrams = []
+        self._raw_data=[]
+        self._users={}
 
     def datelist(self):
         start_year = int(self._S_m[:4])
@@ -84,6 +86,9 @@ class Data_Processor:
     def data(self, data):
         self._M_data = data
         self._recalc()
+
+    def users(self):
+        return self._users
 
     def textdata(self):
         return self._text
@@ -182,6 +187,14 @@ class Data_Processor:
         self._text = {}
         for i in range(len(self._M_data)):
             self._text[self._D_list[i]] = [_['text'] for _ in self._M_data[i]]
+        self._users={}
+        for m in self._M_data:
+            for i in m:
+                if i['username'] in self._users.keys():
+                    self._users[i['username']]+=1
+                else:
+                    self._users[i['username']]=1
+        self._users =list(sorted(self._users.items(),key=lambda x:x[1],reverse=True))
 
     def _dejob(self):
         self._M_data = [[_ for _ in D if
@@ -226,15 +239,19 @@ class Data_Processor:
         return [''.join(grams) for grams in n_grams]
 
     def _remove_dup(self):
+
         D = self._M_data
+        newdata=[]
         for m in D:
-            removed_index = []
-            for i in range(len(m)):
-                for j in range(i + 1, len(m)):
-                    if m[i]['tweet_id'] == m[j]['tweet_id']:
-                        removed_index.append(j)
-            for ele in sorted(removed_index, reverse=True):
-                del m[ele]
+            current_set= set()
+            current_data=[]
+            for i in m:
+                if i['tweet_id'] in current_set:
+                    continue
+                else:
+                    current_data.append(i)
+                    current_set.add(i['tweet_id'])
+            newdata.append(current_data)
         self._M_data = D
 
 

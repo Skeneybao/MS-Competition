@@ -134,7 +134,7 @@ class Data_Processor:
             temp.append([])
             other.append([])
             for i in data:
-                if i['retweets'] > 0 or i['likes'] > 0 or i['is_replied'] or i['is_reply_to'] or i['replies']:
+                if i['retweets'] > 0 or i['likes'] > 0 or i['is_replied'] or i['is_reply_to'] or i['replies'] or (not i['links']):
                     temp[-1].append(i)
                 else:
                     other[-1].append(i)

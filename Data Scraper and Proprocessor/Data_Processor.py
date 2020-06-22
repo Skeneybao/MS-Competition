@@ -40,6 +40,10 @@ class Data_Processor:
         self._unigrams = []
         self._raw_data=[]
         self._users={}
+        self._ban_list=['GoldmanSachBOT','UBS','UBScareers','ubscenter','UBSf1','UBSglobalart','UBS_France','UBSschweiz','UBSvisionaries',
+                        'UBSathletics','ubs_digital','UBSOffice','PersonalCapital','WellsFargoGolf','IN2ecosystem','WFAssetMgmt','WellsFargoJobs',
+                        'WFInvesting','WellsFargoCtr','WFB_Fraud','Ask_WellsFargo','WellsFargo','MorganStanley','GoldmanSachs','Shareworks','ArnoldRKellyms',
+                        'kmac_onjohn','stephfinebot','optimaoptionstw','infoguy411','keithcarron','TrumpIdeasBot']
 
     def datelist(self):
         start_year = int(self._S_m[:4])
@@ -67,6 +71,14 @@ class Data_Processor:
                     month += temp
             self._M_data.append(month)
         self._recalc()
+
+    def userdata(self,screenname):
+        data=[]
+        for m in self.data:
+            for i in m:
+                if i['screen_name'] == screenname:
+                    data.append(i)
+        return data
 
     def datanums(self):
         return self._Lens, sum(self._Lens)
@@ -147,6 +159,7 @@ class Data_Processor:
         self._remove_sign()
         self._dejob()
         self._remove_dup()
+        self._remove_users()
         self._recalc()
 
     def tfidf(self, ngrams):
@@ -190,10 +203,10 @@ class Data_Processor:
         self._users={}
         for m in self._M_data:
             for i in m:
-                if i['username'] in self._users.keys():
-                    self._users[i['username']]+=1
+                if i['screen_name'] in self._users.keys():
+                    self._users[i['screen_name']]+=1
                 else:
-                    self._users[i['username']]=1
+                    self._users[i['screen_name']]=1
         self._users =list(sorted(self._users.items(),key=lambda x:x[1],reverse=True))
 
     def _dejob(self):
@@ -237,6 +250,17 @@ class Data_Processor:
             n_grams = ngrams(token_stop_lemma_alnum, num)
 
         return [''.join(grams) for grams in n_grams]
+
+    def _remove_users(self):
+        newdata=[]
+        for m in self._M_data:
+            cdata=[]
+            for i in m:
+                if i['screen_name'] not in self._ban_list:
+                    cdata.append(i)
+            newdata.append(cdata)
+        self._M_data=newdata
+
 
     def _remove_dup(self):
 

@@ -40,10 +40,12 @@ class Data_Processor:
         self._unigrams = []
         self._raw_data=[]
         self._users={}
-        self._ban_list=['GoldmanSachBOT','UBS','UBScareers','ubscenter','UBSf1','UBSglobalart','UBS_France','UBSschweiz','UBSvisionaries',
-                        'UBSathletics','ubs_digital','UBSOffice','PersonalCapital','WellsFargoGolf','IN2ecosystem','WFAssetMgmt','WellsFargoJobs',
-                        'WFInvesting','WellsFargoCtr','WFB_Fraud','Ask_WellsFargo','WellsFargo','MorganStanley','GoldmanSachs','Shareworks','ArnoldRKellyms',
-                        'kmac_onjohn','stephfinebot','optimaoptionstw','infoguy411','keithcarron','TrumpIdeasBot']
+        self._ban_list=['GoldmanSachBOT','UBS','UBScareers','vandaplas1','ubscenter','UBSf1','UBSglobalart','UBS_France','UBSschweiz','UBSvisionaries',
+                        'UBSathletics','ubs_digital','roboadvisorpros','AskRobinhood','UBSOffice','PersonalCapital','WellsFargoGolf','IN2ecosystem','WFAssetMgmt'
+                        ,'WellsFargoJobs','WFInvesting','WellsFargoCtr','WFB_Fraud','Ask_WellsFargo','WellsFargo','MorganStanley','GoldmanSachs','Shareworks','ArnoldRKellyms',
+                        'kmac_onjohn','stephfinebot','optimaoptionstw','infoguy411','keithcarron','TrumpIdeasBot','Wealthfront','wltheng','WealthfrontJobs',
+                        'arachleff','TDAmeritrade','CharlesSchwab','truthsearch1957','VGaykin','Noalpha_allbeta','Noalpha_allbeta','TDAmeritradePR','stdojo',
+                        'LJames_TDA','_RobTrader_','bankedits','SIFMAFoundation']
 
     def datelist(self):
         start_year = int(self._S_m[:4])

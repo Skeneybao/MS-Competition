@@ -45,7 +45,7 @@ class Data_Processor:
                         ,'WellsFargoJobs','WFInvesting','WellsFargoCtr','WFB_Fraud','Ask_WellsFargo','WellsFargo','MorganStanley','GoldmanSachs','Shareworks','ArnoldRKellyms',
                         'kmac_onjohn','stephfinebot','optimaoptionstw','infoguy411','keithcarron','TrumpIdeasBot','Wealthfront','wltheng','WealthfrontJobs',
                         'arachleff','TDAmeritrade','CharlesSchwab','truthsearch1957','VGaykin','Noalpha_allbeta','Noalpha_allbeta','TDAmeritradePR','stdojo',
-                        'LJames_TDA','_RobTrader_','bankedits','SIFMAFoundation']
+                        'LJames_TDA','_RobTrader_','bankedits','SIFMAFoundation','etrade']
 
     def datelist(self):
         start_year = int(self._S_m[:4])

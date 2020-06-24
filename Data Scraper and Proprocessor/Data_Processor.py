@@ -45,7 +45,12 @@ class Data_Processor:
                         ,'WellsFargoJobs','WFInvesting','WellsFargoCtr','WFB_Fraud','Ask_WellsFargo','WellsFargo','MorganStanley','GoldmanSachs','Shareworks','ArnoldRKellyms',
                         'kmac_onjohn','stephfinebot','optimaoptionstw','infoguy411','keithcarron','TrumpIdeasBot','Wealthfront','wltheng','WealthfrontJobs',
                         'arachleff','TDAmeritrade','CharlesSchwab','truthsearch1957','VGaykin','Noalpha_allbeta','Noalpha_allbeta','TDAmeritradePR','stdojo',
-                        'LJames_TDA','_RobTrader_','bankedits','SIFMAFoundation','etrade']
+                        'LJames_TDA','_RobTrader_','bankedits','SIFMAFoundation','etrade','Roxann_Minerals','tmj_CA_finance','tmj_MN_finance','tmj_MI_finance','tmj_sea_adv',
+                        'tmj_NH_finance','tmj_OR_finance','BROKERHUNTERcom','tmj_VA_finance','goinhouse','tmj_AZ_finance','tmj_WA_finance','tmj_IL_finance','tmj_KY_finance',
+                        'tmj_nct_cstsrv','tmj_NJ_finance','FidelityNews','tmj_FL_finance','tmj_MD_finance','tmj_nwk_cler','tmj_OH_finance','tmj_nwk_acct','tmj_WI_finance',
+                        'tmj_MO_finance','tmj_IN_finance','MerrillLynch','Allstocknews','miroslavpitak','jpmorgan','JPMorganAM','wosaikeneriki','qslzpidbenams',
+                        'daviddo43706820','reurope_stock','Chrisgebb','BankofAmerica','BofA_News','BofA_Tips','BofAPrivateBank','BofA_Business','BofA_Careers','BofA_Help',
+                        'Allstocknews','sheilaballarano','beastsaver','Isabel1170','Vanguard_Group','NoMoreBenjamins']
 
     def datelist(self):
         start_year = int(self._S_m[:4])

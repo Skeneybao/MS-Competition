@@ -20,21 +20,23 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from collections import Iterable
 
 
+
 class Data_Processor:
 
     def __init__(self, start_month='2010-06', end_month='2020-06', template=["/Users/ethan_bao/Wealth_Management"],
-                 tokenizer=TweetTokenizer(strip_handles=True, reduce_len=True), stemmer=nltk.stem.porter.PorterStemmer,
-                 lemma=nltk.wordnet.WordNetLemmatizer):
+                 tokenizer=TweetTokenizer(strip_handles=True, reduce_len=True), stemmer=nltk.stem.porter.PorterStemmer(),
+                 lemma=nltk.wordnet.WordNetLemmatizer()):
         self._S_m = start_month
         self._E_m = end_month
+        self._template=template
         self._D_list = self.datelist()
         self._Dir = template
         self.data = []
         self._text = {}
         self._Lens = []
         self._tokenizer = tokenizer
-        self._stemmer = stemmer()
-        self._lemma = lemma()
+        self._stemmer = stemmer
+        self._lemma = lemma
         self._stopwords = set(nltk.corpus.stopwords.words('english')).union(
             set(['http', 'via', 'ha', 'We', 'I', 'make', 'today', 'A', 'the', 'http', 'one', 'This', 'LLC', 'Inc']))
         self._unigrams = []
@@ -169,7 +171,8 @@ class Data_Processor:
         self._remove_users()
         self._remove_similar()
         self._recalc()
-
+        self._raw_data=self._M_data
+        
     def tfidf(self, ngrams):
         T = [[' '.join(T) for T in month] for month in ngrams]
         R = []

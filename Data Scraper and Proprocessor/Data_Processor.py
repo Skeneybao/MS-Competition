@@ -167,6 +167,7 @@ class Data_Processor:
         self._dejob()
         self._remove_dup()
         self._remove_users()
+        self._remove_similar()
         self._recalc()
 
     def tfidf(self, ngrams):
@@ -190,6 +191,19 @@ class Data_Processor:
                 j['text'] = ' '.join(self.getngrams(data=j['text'], num=1, lemma=Lemma))
             self._M_data[i] = data
         self._recalc()
+
+
+    def _remove_similar(self):
+        new_data=[]
+        for m in self._M_data:
+            current_data=[]
+            current_text=[]
+            for i in m:
+                if i['text'] not in current_text:
+                    current_text.append(i['text'])
+                    current_data.append(i)
+            new_data.append(current_data)
+        self._M_data=new_data
 
     def _remove_link(self):
         for month in self._M_data:
@@ -238,6 +252,7 @@ class Data_Processor:
                 # punctuation
                 from string import punctuation as punc
                 result = re.sub('[{}]'.format(punc), '', result)
+                result = re.sub(r'\s+', ' ', result)
                 result = ''.join([i for i in result if i.isnumeric() == False])
                 twt['text'] = result
 

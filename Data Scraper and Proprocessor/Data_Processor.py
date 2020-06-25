@@ -20,21 +20,23 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from collections import Iterable
 
 
+
 class Data_Processor:
 
     def __init__(self, start_month='2010-06', end_month='2020-06', template=["/Users/ethan_bao/Wealth_Management"],
-                 tokenizer=TweetTokenizer(strip_handles=True, reduce_len=True), stemmer=nltk.stem.porter.PorterStemmer,
-                 lemma=nltk.wordnet.WordNetLemmatizer):
+                 tokenizer=TweetTokenizer(strip_handles=True, reduce_len=True), stemmer=nltk.stem.porter.PorterStemmer(),
+                 lemma=nltk.wordnet.WordNetLemmatizer()):
         self._S_m = start_month
         self._E_m = end_month
+        self._template=template
         self._D_list = self.datelist()
         self._Dir = template
         self.data = []
         self._text = {}
         self._Lens = []
         self._tokenizer = tokenizer
-        self._stemmer = stemmer()
-        self._lemma = lemma()
+        self._stemmer = stemmer
+        self._lemma = lemma
         self._stopwords = set(nltk.corpus.stopwords.words('english')).union(
             set(['http', 'via', 'ha', 'We', 'I', 'make', 'today', 'A', 'the', 'http', 'one', 'This', 'LLC', 'Inc']))
         self._unigrams = []
@@ -45,7 +47,12 @@ class Data_Processor:
                         ,'WellsFargoJobs','WFInvesting','WellsFargoCtr','WFB_Fraud','Ask_WellsFargo','WellsFargo','MorganStanley','GoldmanSachs','Shareworks','ArnoldRKellyms',
                         'kmac_onjohn','stephfinebot','optimaoptionstw','infoguy411','keithcarron','TrumpIdeasBot','Wealthfront','wltheng','WealthfrontJobs',
                         'arachleff','TDAmeritrade','CharlesSchwab','truthsearch1957','VGaykin','Noalpha_allbeta','Noalpha_allbeta','TDAmeritradePR','stdojo',
-                        'LJames_TDA','_RobTrader_','bankedits','SIFMAFoundation']
+                        'LJames_TDA','_RobTrader_','bankedits','SIFMAFoundation','etrade','Roxann_Minerals','tmj_CA_finance','tmj_MN_finance','tmj_MI_finance','tmj_sea_adv',
+                        'tmj_NH_finance','tmj_OR_finance','BROKERHUNTERcom','tmj_VA_finance','goinhouse','tmj_AZ_finance','tmj_WA_finance','tmj_IL_finance','tmj_KY_finance',
+                        'tmj_nct_cstsrv','tmj_NJ_finance','FidelityNews','tmj_FL_finance','tmj_MD_finance','tmj_nwk_cler','tmj_OH_finance','tmj_nwk_acct','tmj_WI_finance',
+                        'tmj_MO_finance','tmj_IN_finance','MerrillLynch','Allstocknews','miroslavpitak','jpmorgan','JPMorganAM','wosaikeneriki','qslzpidbenams',
+                        'daviddo43706820','reurope_stock','Chrisgebb','BankofAmerica','BofA_News','BofA_Tips','BofAPrivateBank','BofA_Business','BofA_Careers','BofA_Help',
+                        'Allstocknews','sheilaballarano','beastsaver','Isabel1170','Vanguard_Group','NoMoreBenjamins']
 
     def datelist(self):
         start_year = int(self._S_m[:4])
@@ -162,8 +169,10 @@ class Data_Processor:
         self._dejob()
         self._remove_dup()
         self._remove_users()
+        self._remove_similar()
         self._recalc()
-
+        self._raw_data=self._M_data
+        
     def tfidf(self, ngrams):
         T = [[' '.join(T) for T in month] for month in ngrams]
         R = []
@@ -185,6 +194,19 @@ class Data_Processor:
                 j['text'] = ' '.join(self.getngrams(data=j['text'], num=1, lemma=Lemma))
             self._M_data[i] = data
         self._recalc()
+
+
+    def _remove_similar(self):
+        new_data=[]
+        for m in self._M_data:
+            current_data=[]
+            current_text=[]
+            for i in m:
+                if i['text'] not in current_text:
+                    current_text.append(i['text'])
+                    current_data.append(i)
+            new_data.append(current_data)
+        self._M_data=new_data
 
     def _remove_link(self):
         for month in self._M_data:
@@ -233,6 +255,7 @@ class Data_Processor:
                 # punctuation
                 from string import punctuation as punc
                 result = re.sub('[{}]'.format(punc), '', result)
+                result = re.sub(r'\s+', ' ', result)
                 result = ''.join([i for i in result if i.isnumeric() == False])
                 twt['text'] = result
 

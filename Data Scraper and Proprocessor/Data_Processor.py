@@ -172,7 +172,7 @@ class Data_Processor:
         self._remove_similar()
         self._recalc()
         self._raw_data=self._M_data
-        
+
     def tfidf(self, ngrams):
         T = [[' '.join(T) for T in month] for month in ngrams]
         R = []

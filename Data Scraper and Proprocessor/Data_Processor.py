@@ -1,7 +1,7 @@
 import json
 import nltk
 import numpy as np
-
+from gensim.models import Word2Vec
 nltk.download('wordnet')
 nltk.download('punkt')
 from nltk.corpus import stopwords
@@ -25,23 +25,26 @@ class Data_Processor:
 
     def __init__(self, start_month='2010-06', end_month='2020-06', template=["/Users/ethan_bao/Wealth_Management"],
                  tokenizer=TweetTokenizer(strip_handles=True, reduce_len=True), stemmer=nltk.stem.porter.PorterStemmer(),
-                 lemma=nltk.wordnet.WordNetLemmatizer()):
+                 lemma=nltk.wordnet.WordNetLemmatizer(),model_name='D'):
         self._S_m = start_month
         self._E_m = end_month
         self._template=template
         self._D_list = self.datelist()
         self._Dir = template
         self.data = []
+        self._sentwords=['yes','sorry','thank']
         self._text = {}
         self._Lens = []
         self._tokenizer = tokenizer
         self._stemmer = stemmer
+        self._topicmodel=gensim.models.Word2Vec.load(model_name)
         self._lemma = lemma
         self._stopwords = set(nltk.corpus.stopwords.words('english')).union(
             set(['http', 'via', 'ha', 'We', 'I', 'make', 'today', 'A', 'the', 'http', 'one', 'This', 'LLC', 'Inc']))
         self._unigrams = []
         self._raw_data=[]
         self._users={}
+        self._unigrams=None
         self._ban_list=['GoldmanSachBOT','UBS','UBScareers','vandaplas1','ubscenter','UBSf1','UBSglobalart','UBS_France','UBSschweiz','UBSvisionaries',
                         'UBSathletics','ubs_digital','roboadvisorpros','AskRobinhood','UBSOffice','PersonalCapital','WellsFargoGolf','IN2ecosystem','WFAssetMgmt'
                         ,'WellsFargoJobs','WFInvesting','WellsFargoCtr','WFB_Fraud','Ask_WellsFargo','WellsFargo','MorganStanley','GoldmanSachs','Shareworks','ArnoldRKellyms',
@@ -71,13 +74,42 @@ class Data_Processor:
         date_list += ["{year}-{month:0=2d}".format(year=str(end_year), month=M) for M in end_year_month_range]
         return date_list
 
+    def gettopic(self,key,counts=1,threshold=20):
+        keys = [_[0] for _ in self._topicmodel.wv.most_similar(key, topn=threshold)] + self._sentwords
+        print(keys)
+        unigrams=self.getngrams(num=1,lemma=True)
+        topic_data = []
+        for m,m_data in enumerate(unigrams):
+            current_topic_data = []
+            for i,i_data in enumerate(m_data):
+                count = 0
+                for token in unigrams[m][i]:
+                    if token in keys:
+                        if count >= counts:
+                            current_topic_data.append(self.data[m][i])
+                            break
+                        else:
+                            count += 1
+            topic_data.append(current_topic_data)
+            print(topic_data)
+        return topic_data
+
     def readdata(self):
         for date in self._D_list:
             month = []
             for key in self._Dir:
                 with open("{dir}{D}.json".format(dir=key, D=date), "r") as read_file:
-                    temp = json.load(read_file)
+                    temp = json.load(read_file)[:-1]
                     month += temp
+            for i in month:
+                if 'positive' not in i.keys():
+                    break
+                if i['positive']>=3 and i['negative']<=-3:
+                    i['sentiment']=float('inf')
+                    continue
+                elif i['positive']>=max(3,-i['negative']*1.5):i['sentiment']=1
+                elif i['negative']<=min(-3,-i['positive']*1.5):i['sentiment']=-1
+                else:i['sentiment']=0
             self._M_data.append(month)
         self._recalc()
 

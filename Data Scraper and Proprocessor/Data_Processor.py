@@ -38,7 +38,7 @@ class Data_Processor:
         self._stemmer = stemmer
         self._topicmodel=gensim.models.Word2Vec.load(model_name)
         self._lemma = lemma
-        self._stopwords = set(nltk.corpus.stopwords.words('english')).union(
+        self._stopwords = (set(nltk.corpus.stopwords.words('english'))).union(
             set(['http', 'via', 'ha', 'We', 'I', 'make', 'today', 'A', 'the', 'http', 'one', 'This', 'LLC', 'Inc']))
         self._unigrams = []
         self._raw_data=[]
@@ -200,7 +200,7 @@ class Data_Processor:
 
     def addstopwords(self, words):
         addon = [i for i in words]
-        self._stopwords += addon
+        self._stopwords = self._stopwords.union(set(addon))
 
     def removenoise(self):
         temp = []
@@ -242,7 +242,7 @@ class Data_Processor:
 
     def tokenizetext(self, Lemma=True):
         for i in range(len(self._M_data)):
-            month = self._D_list[i]
+            month = self.dlist[i]
             data = self._M_data[i]
             for j in data:
                 j['text'] = ' '.join(self.getngrams(data=j['text'], num=1, lemma=Lemma))

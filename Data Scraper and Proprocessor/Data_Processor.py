@@ -29,7 +29,6 @@ class Data_Processor:
         self._S_m = start_month
         self._E_m = end_month
         self._template=template
-        self._D_list = self.datelist()
         self._Dir = template
         self.data = []
         self._sentwords=['yes','sorry','thank']
@@ -55,7 +54,30 @@ class Data_Processor:
                         'tmj_nct_cstsrv','tmj_NJ_finance','FidelityNews','tmj_FL_finance','tmj_MD_finance','tmj_nwk_cler','tmj_OH_finance','tmj_nwk_acct','tmj_WI_finance',
                         'tmj_MO_finance','tmj_IN_finance','MerrillLynch','Allstocknews','miroslavpitak','jpmorgan','JPMorganAM','wosaikeneriki','qslzpidbenams',
                         'daviddo43706820','reurope_stock','Chrisgebb','BankofAmerica','BofA_News','BofA_Tips','BofAPrivateBank','BofA_Business','BofA_Careers','BofA_Help',
-                        'Allstocknews','sheilaballarano','beastsaver','Isabel1170','Vanguard_Group','NoMoreBenjamins']
+                        'Allstocknews','sheilaballarano','beastsaver','Isabel1170','Vanguard_Group','NoMoreBenjamins','IBKR','goinhouse','AskRobinhood','TopTickrs',
+                        'RobinhoodApp','TowelieTrades','RobinHoodNation','RobinhoodPromo','robinhoodportf1','RobinhoodClass','ClassRobinhood','RobinhoodDT',
+                        'RobinHoodPlay','robintrack','EzekialBone','cofoundertron','TradeStation','GreekGodTrading','ClockworkAlerts','RandomFour','Ellevest',
+                        'StyleSalute_com','EllevateNtwk','EllevateCHS','EllevateSAN','EllevatePIT','EllevateLA','netguru','Berry_Blooom','brennan_bloom',
+                        'UlyssesReader','Bloom_Nobly','ArtyPetals','Sara_Bloom_s_','bloom_brenda','marvellebrooks','Milly_Tshivhase','peach_blooom',
+                        'SONIC_BLOOM','Gawgeous_bloom','Lia_in_bloom','Real_Tess_Bloom']
+
+
+    def weeklydatelist(self):
+        start_year = int(self._S_m[:4])
+        start_month = int(self._S_m[-2:])
+        end_year = int(self._E_m[:4])
+        end_month = int(self._E_m[-2:])
+        if start_year == end_year:
+            month_range = range(start_month, end_month + 1)
+            date_list = ["{year}-{month:0=2d}-{week}".format(year=str(start_year), month=M,week=w) for M in month_range for w in (1,2,3,4)]
+            return date_list
+        year_range = range(start_year + 1, end_year)
+        start_year_month_range = range(start_month, 13)
+        end_year_month_range = range(1, end_month + 1)
+        date_list = ["{year}-{month:0=2d}-{week}".format(year=str(start_year), month=M,week=w) for M in start_year_month_range for w in (1,2,3,4)]
+        date_list += ["{year}-{month:0=2d}-{week}".format(year=str(Y), month=M,week=w) for Y in year_range for M in range(1, 13) for w in (1,2,3,4)]
+        date_list += ["{year}-{month:0=2d}-{week}".format(year=str(end_year), month=M,week=w) for M in end_year_month_range for w in (1,2,3,4)]
+        return date_list
 
     def datelist(self):
         start_year = int(self._S_m[:4])
@@ -69,14 +91,13 @@ class Data_Processor:
         year_range = range(start_year + 1, end_year)
         start_year_month_range = range(start_month, 13)
         end_year_month_range = range(1, end_month + 1)
-        date_list = ["{year}-{month:0=2d}".format(year=str(start_year), month=M) for M in start_year_month_range]
+        date_list = ["{year}-{month:0=2d}".format(year=str(start_year), month=M) for M in start_year_month_range ]
         date_list += ["{year}-{month:0=2d}".format(year=str(Y), month=M) for Y in year_range for M in range(1, 13)]
         date_list += ["{year}-{month:0=2d}".format(year=str(end_year), month=M) for M in end_year_month_range]
         return date_list
 
     def gettopic(self,key,counts=1,threshold=20):
         keys = [_[0] for _ in self._topicmodel.wv.most_similar(key, topn=threshold)] + self._sentwords
-        print(keys)
         unigrams=self.getngrams(num=1,lemma=True)
         topic_data = []
         for m,m_data in enumerate(unigrams):
@@ -91,11 +112,12 @@ class Data_Processor:
                         else:
                             count += 1
             topic_data.append(current_topic_data)
-            print(topic_data)
         return topic_data
 
-    def readdata(self):
-        for date in self._D_list:
+    def readdata(self,weekly=False):
+        self._M_data=[]
+        self.dlist = self.datelist() if not weekly else self.weeklydatelist()
+        for date in self.dlist:
             month = []
             for key in self._Dir:
                 with open("{dir}{D}.json".format(dir=key, D=date), "r") as read_file:
@@ -255,7 +277,7 @@ class Data_Processor:
             self._Lens.append(len(i))
         self._text = {}
         for i in range(len(self._M_data)):
-            self._text[self._D_list[i]] = [_['text'] for _ in self._M_data[i]]
+            self._text[self.dlist[i]] = [_['text'] for _ in self._M_data[i]]
         self._users={}
         for m in self._M_data:
             for i in m:

@@ -240,6 +240,18 @@ class Data_Processor:
         )
         return DF
 
+    def getkeyworddata(self,key_word,text=False):
+        data=[]
+        for m in self._M_data:
+            month_data=[]
+            for i in m:
+                if key_word in i['text'].lower():
+                    if text:month_data.append(i['text'])
+                    else:month_data.append(i)
+            data.append(month_data)
+
+        return data
+
     def tokenizetext(self, Lemma=True):
         for i in range(len(self._M_data)):
             month = self.dlist[i]

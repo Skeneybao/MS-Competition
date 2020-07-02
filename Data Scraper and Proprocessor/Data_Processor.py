@@ -36,7 +36,7 @@ class Data_Processor:
         self._Lens = []
         self._tokenizer = tokenizer
         self._stemmer = stemmer
-        self._topicmodel=gensim.models.Word2Vec.load(model_name)
+        self._topicmodel=gensim.models.Word2Vec.load(model_name) if model_name else None
         self._lemma = lemma
         self._stopwords = (set(nltk.corpus.stopwords.words('english'))).union(
             set(['http', 'via', 'ha', 'We', 'I', 'make', 'today', 'A', 'the', 'http', 'one', 'This', 'LLC', 'Inc']))

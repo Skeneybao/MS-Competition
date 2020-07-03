@@ -6,7 +6,7 @@ nltk.download('wordnet')
 nltk.download('punkt')
 from nltk.corpus import stopwords
 from nltk.util import ngrams
-
+import matplotlib
 nltk.download('stopwords')
 from nltk.tokenize import TweetTokenizer
 import re
@@ -44,6 +44,7 @@ class Data_Processor:
         self._raw_data=[]
         self._users={}
         self._unigrams=None
+        self.dlist = self.datelist()
         self._ban_list=['GoldmanSachBOT','UBS','UBScareers','vandaplas1','ubscenter','UBSf1','UBSglobalart','UBS_France','UBSschweiz','UBSvisionaries',
                         'UBSathletics','ubs_digital','roboadvisorpros','AskRobinhood','UBSOffice','PersonalCapital','WellsFargoGolf','IN2ecosystem','WFAssetMgmt'
                         ,'WellsFargoJobs','WFInvesting','WellsFargoCtr','WFB_Fraud','Ask_WellsFargo','WellsFargo','MorganStanley','GoldmanSachs','Shareworks','ArnoldRKellyms',
@@ -114,9 +115,51 @@ class Data_Processor:
             topic_data.append(current_topic_data)
         return topic_data
 
+    def trend_analysis(self,keyword_list,polarity=0,count=1):
+        # polarity=0 for pos, 1 for neg
+        if not isinstance(polarity,Iterable):
+            polarity=[polarity]
+        data=self._M_data
+        all_months=self.dlist
+        for pos in polarity:
+            app = self._subanalyze_sentiment(keyword_list, count)
+            matplotlib.rcParams['figure.dpi'] = 100
+            fig, ax1 = plt.subplots(figsize=(7, 4))
+            ax1.plot(np.array(all_months), app[pos], color='C' + str(pos + 1))
+            ax1.set_xticks(np.arange(36))
+            ax1.set_xticklabels([i if x % 3 == 0 else '' for x, i in enumerate(all_months)], rotation=45)
+            ax1.set_ylabel('Sentiment Polarity')
+            for t in ax1.xaxis.get_ticklines():
+                t.set_visible(False)
+            for t in ax1.xaxis.get_ticklines()[::2][::3]:
+                t.set_visible(True)
+            ax2 = ax1.twinx()
+            for t in ax2.xaxis.get_ticklines():
+                t.set_visible(False)
+            for t in ax2.xaxis.get_ticklines()[::2][::3]:
+                t.set_visible(True)
+            ax2.set_xticks(np.arange(36))
+            ax2.set_xticklabels([i if x % 3 == 0 else '' for x, i in enumerate(all_months)], rotation=45)
+            ax2.bar(all_months, app[2], alpha=0.3)
+            ax2.set_ylabel('Sentiment Frequency')
+            extra = '...' if len(keyword_list) > 5 else ''
+            ax1.set_title('Keywords: ' + ', '.join(keyword_list[:5]) + extra)
+            plt.show()
+
+    def show_tweets(self,month_list, keywords, count=1, threshold=2, unique=False):
+        result = []
+        for m in month_list:
+            idx = self.dlist.index(m)
+            for item in self._M_data[idx]:
+                if sum([int(k in item['text'].lower()) for k in keywords]) >= count and (
+                        item['positive'] > threshold or item['negative'] < -threshold):
+                    result.append((item['text'], item['positive'], item['negative']))
+
+        return sorted(list(set(result)), key=lambda x: x[0]) if unique else sorted(result, key=lambda x: x[0])
+
     def readdata(self,weekly=False):
-        self._M_data=[]
         self.dlist = self.datelist() if not weekly else self.weeklydatelist()
+        self._M_data=[]
         for date in self.dlist:
             month = []
             for key in self._Dir:
@@ -261,12 +304,31 @@ class Data_Processor:
             self._M_data[i] = data
         self._recalc()
 
+    def _subanalyze_sentiment(self,keywords, count):  # data hierarchy: months*(text,score)*piece
+        data=self._M_data
+        positivity = []
+        negativity = []
+        freq = []
+        for month_data in data:
+            pos, neg, num = 0, 0, 0
+
+            for item in month_data:
+                if sum([int(k.lower() in item['text'].lower()) for k in keywords]) >= count:
+                    pos += item['positive']
+                    neg += item['negative']
+                    num += 1  # save number of tweets containing the filtered words with at least #count times
+
+            positivity.append(pos / max(1, num))
+            negativity.append(neg / max(1, num))
+            freq.append(num)
+
+        return positivity, negativity, freq
 
     def _remove_similar(self):
         new_data=[]
+        current_text = []
         for m in self._M_data:
             current_data=[]
-            current_text=[]
             for i in m:
                 if i['text'] not in current_text:
                     current_text.append(i['text'])

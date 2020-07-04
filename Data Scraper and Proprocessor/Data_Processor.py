@@ -115,17 +115,39 @@ class Data_Processor:
             topic_data.append(current_topic_data)
         return topic_data
 
-    def trend_analysis(self,keyword_list,polarity=0,count=1):
+    def trend_analysis(self,keyword_list,polarity=0,count=1,ma=None):
         # polarity=0 for pos, 1 for neg
         if not isinstance(polarity,Iterable):
             polarity=[polarity]
         data=self._M_data
         all_months=self.dlist
+        app = self._subanalyze_sentiment(keyword_list, count)
         for pos in polarity:
-            app = self._subanalyze_sentiment(keyword_list, count)
+            if ma:
+                supline=np.zeros(len(all_months))
+                subline=np.zeros(len(all_months))
+                average = np.zeros(len(all_months))
+                for i, m in enumerate(all_months):
+                    if i == 0:
+                        average[i] =app[pos][i]
+                        supline[i]=average[i]
+                        subline[i]=average[i]
+                    elif i<ma:
+                        average[i]=np.mean(app[pos][:i+1])
+                        supline[i]=average[i]+np.std(app[pos][:i+1])
+                        subline[i]=average[i]-np.std(app[pos][:i+1])
+                    else:
+                        average[i]=np.mean(app[pos][i-ma+1:i+1])
+                        supline[i]=average[i]+np.std(app[pos][i-ma+1:i+1],ddof=1)
+                        subline[i]=average[i]-np.std(app[pos][i-ma+1:i+1],ddof=1)
+
             matplotlib.rcParams['figure.dpi'] = 100
             fig, ax1 = plt.subplots(figsize=(7, 4))
             ax1.plot(np.array(all_months), app[pos], color='C' + str(pos + 1))
+            if ma:
+                ax1.plot(np.array(all_months), average, 'plum')
+                ax1.plot(np.array(all_months), supline, 'b--')
+                ax1.plot(np.array(all_months), subline, 'r--')
             ax1.set_xticks(np.arange(36))
             ax1.set_xticklabels([i if x % 3 == 0 else '' for x, i in enumerate(all_months)], rotation=45)
             ax1.set_ylabel('Sentiment Polarity')
@@ -322,16 +344,16 @@ class Data_Processor:
             negativity.append(neg / max(1, num))
             freq.append(num)
 
-        return positivity, negativity, freq
+        return negativity, positivity, freq
 
     def _remove_similar(self):
         new_data=[]
-        current_text = []
+        current_text =set()
         for m in self._M_data:
             current_data=[]
             for i in m:
                 if i['text'] not in current_text:
-                    current_text.append(i['text'])
+                    current_text.union(i['text'])
                     current_data.append(i)
             new_data.append(current_data)
         self._M_data=new_data

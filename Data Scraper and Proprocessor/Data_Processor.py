@@ -117,7 +117,6 @@ class Data_Processor:
 
     def sentperct(self,month):
         idx = self.dlist.index(month)
-        print("positive", "negative", "count")
         count = Counter([(item['positive'], item['negative']) for item in self.data[idx]])
         for i in sorted(count.items(), key=lambda x: -x[1]):
             print(i[0],i[1]/len(self.data[idx]),i[1])

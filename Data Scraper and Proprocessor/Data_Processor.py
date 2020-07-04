@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud, STOPWORDS
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
-from collections import Iterable
+from collections import Iterable,Counter
 
 
 
@@ -114,6 +114,15 @@ class Data_Processor:
                             count += 1
             topic_data.append(current_topic_data)
         return topic_data
+
+    def sentperct(self,month):
+        idx = self.dlist.index(month)
+        print("positive", "negative", "count")
+        count = Counter([(item['positive'], item['negative']) for item in self.data[idx]])
+        for i in sorted(count.items(), key=lambda x: -x[1]):
+            print(i[0],i[1]/len(self.data[idx]),i[1])
+
+
 
     def trend_analysis(self,keyword_list,polarity=0,count=1,ma=None):
         # polarity=0 for pos, 1 for neg

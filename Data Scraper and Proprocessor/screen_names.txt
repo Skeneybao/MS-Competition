@@ -1,5 +1,5 @@
 acemaxx 1096
-marketst0day 546
+marketst0day 547
 JacekWierzbicki 532
 AnalystWire 441
 Ashish_shah72 397
@@ -7,9 +7,9 @@ BloombergQuint 364
 _Bitter_Actor 359
 MarketCurrents 293
 CNBCTV18Live 290
-zerohedge 287
+zerohedge 289
 theflynews 276
-ETNOWlive 263
+ETNOWlive 264
 18dMedia 257
 GastonBonSaint 255
 business 239
@@ -17,20 +17,20 @@ Filapek 231
 carlquintanilla 229
 businessinsider 224
 Benzinga 219
-fundconsult 210
+fundconsult 211
 politicalHEDGE 208
 ChrisArnellaMS 203
 psk2329 193
+GlobalInvestor5 183
 barronsonline 182
 MarketWatch 182
-GlobalInvestor5 178
 bullstreetco 177
 CNBC 177
-HedgeBz 176
+HedgeBz 177
 snufflesdbear 161
-WilliamMorgan83 152
+WilliamMorgan83 153
+MarketsTicker 149
 CoryGroshek 149
-MarketsTicker 146
 watsupwitthatms 143
 VarundubeyCNBC 141
 Francesc_Forex 138
@@ -43,14 +43,14 @@ MitchellDStein1 129
 stockhoot 129
 markets 127
 AshVerma111 125
-FDRInvestments 124
+FDRInvestments 125
 nyphospital 124
 FinancialReview 122
 GreggwilsonB 121
 ThinkAdvisor 120
 stocknewsdotcom 120
+ETMarkets 115
 FortuneWealth 114
-ETMarkets 113
 YahooFinance 113
 solar_bear07 110
 IPOBoutique 108
@@ -60,8 +60,8 @@ SamRo 105
 SeekingAlpha 105
 finplan 101
 cmss412 99
+DeItaOne 98
 MadMraket 98
-DeItaOne 97
 sonalibasak 97
 BioStocks 96
 bitcoinagile 91
@@ -99,31 +99,31 @@ KunklerKkunkler 71
 onwallstreet 71
 Scutty 70
 TabbFORUM 70
+moneycontrolcom 70
 communicipalist 70
 apbeaton 70
-moneycontrolcom 69
 CNBCTV18News 69
 lizrhoffman 69
 thesheetztweetz 69
+BTVI 68
 WeekHerald 68
 NexJql 67
 FinancialNews 67
 theedgemalaysia 67
-BTVI 67
 The_Real_Fly 67
 canuck2usa 67
 vieiraUAE 66
 WatchlistN 65
 stocksharks_ 65
+INDMarketsLIVE 65
 Sandra_gw 64
 evdefender 64
-INDMarketsLIVE 64
 7LadyQ 63
 advisorhubinc 63
 FXstreetNews 63
 ConsumerFeed 63
 ReutersJamie 62
-yyyzzzzzzzz 61
+yyyzzzzzzzz 62
 kestrelnetworks 61
 bsurveillance 61
 sharebossindia 61
@@ -137,14 +137,14 @@ pulpmarkets 59
 marketexclusive 59
 nycsocialg 59
 cfromhertz 59
+Street_Insider 58
 TickerReport 58
 deepaliranaa 58
 J_OColit 58
-Street_Insider 57
 urtrading 57
 machar131 57
+dakotafinancial 56
 BookTrustUSA 56
-dakotafinancial 55
 TheStreet 55
 ZolmaxNews 55
 CGasparino 55
@@ -171,28 +171,28 @@ OHfoodtruckfind 51
 SOMAMadman 51
 philiped 50
 DiMartinoBooth 50
+darshanvmehta1 50
 DailyStockPlays 50
 keriRN 50
 crushthemarket 50
+JMcQueenFX 50
 LithiumIonBull 50
 LithiumReality 50
 solotrader 49
 efc_global 49
 DealStreetAsia 49
-darshanvmehta1 49
 ThisLincolnian 49
-JMcQueenFX 49
 warrior16win 49
 TheVolawatcher 49
 hulkman2 48
 littleho_song 48
+Artum12 47
 MrBlakeRobbins 47
 simplisticpro 46
 Cybrarian64 46
 ThePitBoss16 46
 dispatchtribune 46
 WSJmarkets 46
-Artum12 46
 SocialistNomad 46
 BloombergAU 46
 EnterpriseLeade 46
@@ -365,6 +365,7 @@ jjjinvesting 30
 caetuscap 30
 MarcoOlevano 30
 JatikaSpeaks 30
+MrTopStep 30
 AmmOMug 30
 cppinvest 30
 franklinstrauss 30
@@ -376,12 +377,12 @@ John54436259 30
 Tradeexpert3 30
 valuewalk 29
 tony_sirianni 29
+PlayResilience 29
 CryptoNewswire 29
 TideIsopod 29
 NigelShartcrac1 29
 TeresaVollenwei 29
 WhoseRep 29
-MrTopStep 29
 IncredibleTrade 29
 CorbeauxInvest 29
 PTalkingraven 29
@@ -393,7 +394,6 @@ passthebeano 29
 lisascherzer 29
 Dr_CorbinCWong 28
 kimbarrett 28
-PlayResilience 28
 NSPCC 28
 RenukaJain6 28
 sueyangfx 28
@@ -410,12 +410,14 @@ idiot_girl 28
 RyherdPhyllis 28
 Polixenes13 28
 investingport 28
+MotilalOswalLtd 27
 FT 27
 ResearchPool 27
 trader_53 27
 johnkiger2 27
 namasterthere 27
 seanandlizs 27
+CNBCi 27
 CNBCPro 27
 fxzoneofficial 27
 jaazee1 27
@@ -439,10 +441,8 @@ EllisGBS 26
 Dan_Kostecki 26
 betty_dekanchuk 26
 godslovenyc 26
-MotilalOswalLtd 26
 WATC_WeAreTech 26
 YatinMota 26
-CNBCi 26
 stickycactusink 26
 KennethMilesTa2 26
 wkinca 26
@@ -490,6 +490,7 @@ GoldSilver_com 24
 AstoriaAdvisors 24
 LithiumPodcast 24
 PilotlightUK 24
+WinfieldSmart 24
 ericsiler8_eric 24
 reviews_blogger 24
 mfletcher530 24
@@ -516,7 +517,6 @@ DavidHerzstein 23
 SodykMS 23
 IC_Markets 23
 thequ4nt 23
-WinfieldSmart 23
 Arrowmoney9 23
 ISDA 23
 clmuseum 23
@@ -540,7 +540,9 @@ CityAM 22
 DemiAdewumi 22
 Sterph1 22
 enplacecolumbus 22
+ChannelNewsAsia 22
 technology 22
+odibro 22
 P00Hrae 22
 FredPGabriel 22
 FactsReason 22
@@ -550,6 +552,7 @@ FactsnOpinion1 22
 tony_sabol 22
 Researchiing 22
 btgga 22
+Pete_Clay 22
 MattMillerCubed 22
 treesandquiet 22
 QContrarian 22
@@ -573,9 +576,7 @@ AFeldman2 21
 myfanpleasure 21
 GutierrezRom 21
 StephenTheCynic 21
-ChannelNewsAsia 21
 shazmigangs 21
-odibro 21
 wharrrgarrbl 21
 MaisaCorp 21
 FortuneMagazine 21
@@ -593,7 +594,6 @@ ProgressIsComin 21
 ZENINEWS 21
 Future_Assetmgt 21
 spakkal 21
-Pete_Clay 21
 elementartyy 21
 jpr007 21
 ithinkifoundyou 21
@@ -616,6 +616,7 @@ the_mantese 20
 Myla944 20
 rebeccajoc 20
 iRelaunch 20
+FJRL65 20
 nazani14 20
 InvResDynamics 20
 IonisDisrupts 20
@@ -659,7 +660,6 @@ Mike_Thrasher 19
 TimCarver9 19
 HedgeMind 19
 acrossthecurve 19
-FJRL65 19
 Sivafundamental 19
 RichPoliticals 19
 into_AI 19
@@ -732,6 +732,7 @@ AjTrader7 18
 MixingAndLaw 18
 cocobutt07 18
 realalexx1 18
+PhoenixSquawk 18
 mrdefender1983 18
 AceMarketU 17
 Forex_warrior 17
@@ -750,6 +751,7 @@ BlakeFox7 17
 TOSFALLA3 17
 tundrawolfqueen 17
 UnionYes19 17
+i_zekel 17
 salqahtani1111 17
 FairTax4America 17
 gostocksin 17
@@ -780,7 +782,6 @@ slashmehappy 17
 RickFreedland 17
 Amitabhc1 17
 Kelly02179741 17
-PhoenixSquawk 17
 GoldSpotNews 17
 Thomas_Wilckens 17
 MijanouMS 16
@@ -810,7 +811,6 @@ Gerry02140 16
 navycapital 16
 stockmarkettv 16
 MiamiMagus 16
-i_zekel 16
 Bigdaddybtc 16
 HardwickRalph 16
 teragramus 16
@@ -846,6 +846,7 @@ mnaEN 16
 herray11 16
 liztait 16
 hispanicpro 16
+data168 16
 calder_price 16
 WallStCards 16
 realstsincjesus 16
@@ -868,6 +869,7 @@ pipsnticks 15
 SullivanMonty 15
 dogetalist 15
 potter_kitty 15
+1966MAVERICK 15
 MMpolytechnical 15
 Stevewal63 15
 RAM0667 15
@@ -932,7 +934,6 @@ TeenageCancer 15
 cherry_LA 15
 TheMrDev 15
 FireTrading_ 15
-data168 15
 DeepeshBhargav7 15
 AndreinMD 15
 newsfilterio 15
@@ -946,6 +947,7 @@ yicaichina 14
 BDNEWSGUY 14
 MedicalQuack 14
 ChaseACarlson 14
+Airgeadais 14
 Charities_Trust 14
 yashthakrar1996 14
 stockfraudlaw 14
@@ -956,7 +958,6 @@ RobShiveley 14
 MJ20360208 14
 GrodyCount 14
 ezy06001 14
-1966MAVERICK 14
 Svobodnik1 14
 RohanG90 14
 KASDad 14
@@ -1129,6 +1130,7 @@ MarkMcSherryNY 13
 1stOncology 13
 CnsmrProServLn 13
 OCDstocks 13
+breakingmkts 13
 InsiderForms 13
 RTreiger 12
 theTRADEnews 12
@@ -1136,7 +1138,6 @@ ozoran 12
 tomkeene 12
 BitcoinBolt 12
 MelodieCJMF 12
-Airgeadais 12
 russ8979 12
 vccircle 12
 shatzakis 12
@@ -1252,7 +1253,6 @@ Tradinguru55 12
 casareilly 12
 exis10tial 12
 1Terry 12
-breakingmkts 12
 realnewspro 12
 sellvolbuytesla 12
 ExcelerateBiz 12
@@ -1262,6 +1262,7 @@ GroundworkLON 11
 davidmwessel 11
 GigaBitcoin 11
 WilliamDevine10 11
+FonsieTrader 11
 SpirosMargaris 11
 JohnGillilandMS 11
 lzr999 11
@@ -1410,7 +1411,6 @@ Ann_M511 10
 3novices 10
 aquart 10
 GenericGene 10
-FonsieTrader 10
 Aurona47 10
 Uncle_Ric 10
 hysellaz 10
@@ -1745,6 +1745,7 @@ researchinn 9
 UPBOptionMil 9
 amikegreen2 9
 simonjester2424 9
+TeslaOpinion 9
 brunneng38 9
 teslavangelist 9
 WHFakeNews 9
@@ -1853,6 +1854,7 @@ petermsherin 8
 sautterlas65 8
 Saul_Bloom 8
 TimCarmichael3 8
+BIUK_Finance 8
 briteless 8
 FXCM 8
 JeanetteLGamble 8
@@ -2021,6 +2023,7 @@ SianteJ 8
 bluetsunami22 8
 Stephaniefishm4 8
 blmohr 8
+charliebilello 8
 ScotDevInt 8
 Seaforde1 8
 JosephOConnell3 8
@@ -2031,8 +2034,8 @@ WINNYC_ORG 8
 robertcaruso 8
 Gedsudski 8
 Kevingr76354949 8
+Options 8
 mpi_digital 8
-TeslaOpinion 8
 Freespeechbut 8
 Teslarati 8
 TradeHungry 8
@@ -2059,6 +2062,7 @@ andrewmorrris66 8
 giuliog 8
 NewsShamel 8
 twj_optionsflow 8
+rajivmehta19 8
 enagem72 8
 LewAssaleyMS 8
 _algocapital 8
@@ -2085,12 +2089,14 @@ sklee1086 8
 AskAmex 8
 maj_nass 8
 justtradin 8
+guen_tai 8
 packetsniffer99 8
 AJNOR88 8
 Monaco_Trader 8
 OptionAlarm 8
 ARunner200 8
 youreschmoopie 8
+trips_tesla 8
 PCribbett 8
 ranjitrana4u 8
 forum_stock 8
@@ -2200,7 +2206,6 @@ TereneMicciche 7
 Mortyjeffy 7
 davidenrich 7
 jkaonline 7
-BIUK_Finance 7
 KinseyGrant 7
 CarbonBubble 7
 sveaherbst 7
@@ -2306,6 +2311,7 @@ j_aja4 7
 RTGWorld 7
 edfischman 7
 cnbcSri 7
+equityin 7
 OptionsGroup 7
 TuliUrbach 7
 NaviAvatar1 7
@@ -2349,6 +2355,7 @@ gradcracker 7
 spcclb 7
 speirin 7
 WilliamAthaIIMS 7
+robinsnewswire 7
 SterlingFincap 7
 stapf 7
 BryceEdw 7
@@ -2456,7 +2463,6 @@ ChamDiversity 7
 synack 7
 JasonMClaspill 7
 GretaLWall 7
-Options 7
 James7Holland 7
 alanohnsman 7
 cathyhc 7
@@ -2490,7 +2496,6 @@ opiejeanne 7
 UoDCareers 7
 JoshuaKessler1 7
 CoolThesis 7
-rajivmehta19 7
 KnowetopPrimary 7
 pacemakernj 7
 LoaderFee 7
@@ -2524,7 +2529,6 @@ kifleswing 7
 YoelMinkoff 7
 RedboxWire 7
 optionslion8 7
-guen_tai 7
 stealthebasis 7
 TheSeeqer 7
 Sean6466097 7
@@ -2541,7 +2545,6 @@ AMacnevins 7
 jcbrhodesia 7
 jaykay0071 7
 Shiin_RAMu 7
-trips_tesla 7
 nareshbahrain 7
 ATAFIN 7
 teshen8lin 7
@@ -2829,7 +2832,6 @@ trhyndes 6
 PenPrecise 6
 ET_Edge 6
 beantowndexter 6
-equityin 6
 felonyfinance 6
 rossbi 6
 DTDingle 6
@@ -2868,6 +2870,7 @@ isawthesethings 6
 newsbtc 6
 brokeandbroker 6
 acp_usa 6
+iPhone_News 6
 satsearchco 6
 ArcuriPolasek 6
 afortunetrading 6
@@ -2884,7 +2887,6 @@ wingod 6
 Msbmoran 6
 Knightsofgolf1 6
 MeganKashner 6
-robinsnewswire 6
 jbrofford1 6
 andyspasta 6
 JPFerrerMS 6
@@ -2947,6 +2949,7 @@ TheAtlantic 6
 dee_bosa 6
 iYashUpadhyaya 6
 SNEHAmumbai 6
+Traderideas1 6
 casinolifemag 6
 saeedamenfx 6
 FeldmanEquities 6
@@ -3033,6 +3036,7 @@ daverandLA 6
 Trisseswe 6
 WeissCrypto 6
 NYNJCouncil 6
+WallStreetPenni 6
 mmahoooooit 6
 CryptoAuthorit 6
 GirlsWhoCode 6
@@ -3243,6 +3247,7 @@ spycho 6
 HRPS 6
 parks925 6
 kashmiKashmi1 6
+IyyerMeghana 6
 bossivic 6
 Alexa98941934 6
 PigOfFed 6
@@ -3489,6 +3494,8 @@ gingermckchav 5
 rVivianArnold 5
 EllipsisVentus 5
 atlblog 5
+Mayurmatam 5
+cleantechnica 5
 ETRetail 5
 DeccanChronicle 5
 FercanY 5
@@ -3510,6 +3517,7 @@ mikelm31 5
 RitholtzWealth 5
 richcash8 5
 3BLNews 5
+stocksocialnews 5
 patspero 5
 electrictweep 5
 DavidCaryMS 5
@@ -3711,7 +3719,6 @@ kirsikkalar 5
 RoryMaw 5
 InnFin 5
 Bdubbs76 5
-iPhone_News 5
 DLee475 5
 dsquareddigest 5
 stevemiddi1 5
@@ -3869,7 +3876,6 @@ saveafrenALAG 5
 BeautyLynk 5
 sailorsfly1 5
 FierceWireless 5
-Traderideas1 5
 RakutenStock 5
 RichC 5
 itzstockchartz 5
@@ -3943,7 +3949,6 @@ Ev_Investor 5
 pd_log 5
 USMoneyReserve 5
 KepQuan 5
-charliebilello 5
 conorsen 5
 avalon5115 5
 chigrl 5
@@ -4001,7 +4006,6 @@ melindaville 5
 rtoh 5
 MubinaKapasi 5
 avigandhi19 5
-WallStreetPenni 5
 Gjallarhornet 5
 IMOKUSUK 5
 suzyluves 5
@@ -4027,6 +4031,7 @@ GreatOrmondSt 5
 Atiesnhoj 5
 usey0urbra1n 5
 ThinknumMedia 5
+UofGCareers 5
 DanDansinger 5
 sawa201200 5
 ElthamCareers 5
@@ -4253,7 +4258,6 @@ zeroedtweets 5
 edwincwc 5
 intcryptonews 5
 Teslaq_Snark 5
-IyyerMeghana 5
 SV_Tshandy 5
 FabreJrme1 5
 CornellMBA 5
@@ -4587,7 +4591,6 @@ gaslucas 4
 ShoeKat 4
 Tuesdayschldrn 4
 xXGarboXx 4
-Mayurmatam 4
 pasadenalady63 4
 davidgossetase 4
 dandhicks 4
@@ -4620,7 +4623,6 @@ staronline 4
 azwan_ 4
 ILCtsxv 4
 BIUK_Politics 4
-stocksocialnews 4
 smcmahonMS 4
 CollinEatonHC 4
 BostonWomen 4
@@ -5200,6 +5202,7 @@ globaltimesnews 4
 tamitao2 4
 Bitcoinwalking 4
 DrRasta12 4
+freebitcoindir 4
 Khurelbaatar_G 4
 Iozzo_sportacus 4
 GermanDayTrader 4
@@ -5431,7 +5434,6 @@ SellHomesAV 4
 KDKOptions 4
 svbizjournal 4
 phunkshun 4
-cleantechnica 4
 TradeWithNinja 4
 LukeMcDuke 4
 jbrunke16 4
@@ -5489,7 +5491,6 @@ MSteigerwaldMS 4
 SIPA_DCG 4
 weedstreet420 4
 florindoc2003 4
-UofGCareers 4
 BitTrade4 4
 scrowley88 4
 greatwhitecapr 4
@@ -5516,6 +5517,7 @@ RBCSignals 4
 slowpaddler 4
 HaleyThayer_ 4
 OrchidNYC 4
+TouTzuSays 4
 frauvis 4
 OUTstandingiB 4
 BetoMendeleiev 4
@@ -5634,6 +5636,7 @@ Merlin3ks 4
 mercedescoleen 4
 seanmmitchell 4
 thekarmaimpact 4
+NOD008 4
 goldentouch73 4
 MaryNYC1 4
 X__Anderson 4
@@ -6975,6 +6978,7 @@ satyapanda61 3
 EveODestruction 3
 stormin4909 3
 WACHouston 3
+hkanji 3
 Bill5Mauldin 3
 Mietopol 3
 maggiegosia 3
@@ -7523,6 +7527,7 @@ beattymarsh 3
 Ccnn35555922 3
 AlsoGrateful 3
 glaser_holly 3
+yesitsme111 3
 CTAFP 3
 warrenmcintosh5 3
 MCins_ 3
@@ -7632,7 +7637,6 @@ AnonuevoSk 3
 DmitryMolotkov 3
 SteveHamel1 3
 Web3Shane 3
-freebitcoindir 3
 scpttzhange 3
 dfinke 3
 cacrisalves 3
@@ -8303,7 +8307,6 @@ RealMikeLarson 3
 wolfjon4 3
 EquidiousSignal 3
 DrKMNavarro 3
-TouTzuSays 3
 binary8options 3
 10QReports 3
 PositiveBlackS1 3
@@ -8513,6 +8516,7 @@ behindthebid 3
 bshennessey 3
 SeanaNSmith 3
 timechols 3
+888_sniper 3
 Seagate 3
 publicbankla 3
 VarchevLtd 3
@@ -9602,6 +9606,7 @@ JeanieSovereign 2
 Benito35ddDavis 2
 bender_b_rodgez 2
 Handshake_USA 2
+newstermer 2
 1ubuntufan 2
 scottabel 2
 TheStartupTimes 2
@@ -11267,6 +11272,7 @@ jerseejess 2
 ChristineatMS 2
 marting163 2
 david_azwunn 2
+DavidRaeCFP 2
 LexusMadison 2
 kemer_kevin 2
 MauriceMichael 2
@@ -11461,6 +11467,7 @@ egglady295 2
 VeronicaDagher 2
 skiweed01 2
 CPA_Trendlines 2
+BMouler 2
 SustainableJobs 2
 NatlDevCouncil 2
 krispijnbeek 2
@@ -11488,7 +11495,6 @@ jeewangarg_ 2
 kitesforkids 2
 Raven_ZZC 2
 CryptoWide 2
-hkanji 2
 newsforyouSA 2
 srdrsny 2
 easymaterials 2
@@ -11710,6 +11716,7 @@ CloisterRes 2
 gratott 2
 Dolat_Capital 2
 VicenteOchoaJr 2
+MineForSale 2
 MyPprice 2
 Jezebel 2
 chiIIum 2
@@ -12531,6 +12538,7 @@ BTCWorldNews 2
 WillMedford23 2
 ArchMcClure 2
 BaruchSCDC 2
+DuffnsunNancy 2
 jhsutherland2 2
 WaelTheTrader 2
 nico_celaj 2
@@ -12906,7 +12914,6 @@ nobodytoknow 2
 FrenchEntree 2
 FranklinPalmer7 2
 DBerryMS 2
-yesitsme111 2
 PaulBabaz 2
 readysetrocket 2
 BKlukvine 2
@@ -12949,6 +12956,7 @@ SFGate 2
 thisguy468 2
 Elgirrl 2
 Oregonian 2
+GeraldineKestn2 2
 CeeLeeMusic 2
 Inc42 2
 jennifere133 2
@@ -13188,6 +13196,7 @@ GregRoumeliotis 2
 iammunishankar 2
 JuneCasagrande 2
 DiamondBuyClub 2
+aebaca1 2
 rchinfotech 2
 Brixalmighty 2
 Wadadli1 2
@@ -13645,6 +13654,7 @@ msramming 2
 Silvia_Pavoni 2
 Rufree13 2
 melisheath 2
+JA3RATHOD 2
 AHA_housingall 2
 flawlessgrats 2
 SCFLCori 2
@@ -14839,6 +14849,7 @@ williamdclark 2
 Nirav_88 2
 JosephMRyan1 2
 mitchellvii 2
+SengoHector 2
 just3cutsyo 2
 atlassheepdog 2
 iesebschool 2
@@ -15474,7 +15485,6 @@ LedouxPedailles 2
 BirdsofParadiz8 2
 CSCArizona 2
 angiesson1 2
-888_sniper 2
 iamjamesrhee 2
 JurryL212 2
 gsnorjud 2
@@ -15710,7 +15720,6 @@ quandl 2
 PRWowFactor 2
 flyhombre 2
 fpinvesting 2
-NOD008 2
 CoryLVenable 2
 GSinghSTARR 2
 you_stem 2
@@ -17578,6 +17587,7 @@ DHSixthForm 2
 WMcg11 2
 BrianDonnellyHT 2
 ray4tesla 2
+seaworth_ser 2
 CelineDarnet_ 2
 SatelliteCanada 2
 CasPiancey 2
@@ -17623,6 +17633,7 @@ KyleR_IG 2
 jgreco 2
 Dissident_US 2
 lending_guy 2
+Mohdfaour89 2
 ClintJorgenson 2
 TJAnderson1 2
 CAacademycom 2
@@ -19274,6 +19285,7 @@ LotteBalnave 1
 OzFacts 1
 cint 1
 KeilyBlair 1
+RyansRamble 1
 poulwoodall 1
 kat_pro 1
 magicmagnus 1
@@ -21875,6 +21887,7 @@ t_massoudi 1
 christiankingo1 1
 sugandhcomm 1
 david_milliken 1
+alvillsan 1
 karlcleere 1
 trramblin 1
 Kittens4milk 1
@@ -22601,6 +22614,7 @@ LRoyAuthor 1
 CityUTutorial 1
 Yombe 1
 mmaonthereg 1
+DavalynManager 1
 _RozKay 1
 CarrattCook 1
 AndyShaw1 1
@@ -24918,6 +24932,7 @@ latha_venkatesh 1
 SkiProJG 1
 BaiAnLtd 1
 VivekKu06062426 1
+shyamchaturvedi 1
 11patelmukesh 1
 danielletts 1
 Briseisji 1
@@ -24971,6 +24986,7 @@ VijayDilor 1
 Estimize 1
 meetmurli 1
 BRJATIN 1
+CAdhawalShah 1
 arunt2016 1
 HenrykKowal 1
 DupontCircleCap 1
@@ -25489,7 +25505,6 @@ vanalich 1
 ubiquitousai 1
 biofan1 1
 VijiDeyTweets 1
-DavidRaeCFP 1
 RhondaJRose 1
 PurePortfolios 1
 CureMsd 1
@@ -25757,6 +25772,7 @@ KingKrankor 1
 LonepineRjr 1
 MsEYates 1
 hmandaliya21 1
+prashant_pro16 1
 Scott_Beamer 1
 MikeBTaylor11 1
 grammybenson191 1
@@ -26507,6 +26523,7 @@ adellapasos 1
 anmola889 1
 Scorb_Coin 1
 SonuSha77852301 1
+arunjaitley 1
 CriderPblr1961 1
 GeekWithAKnife 1
 harrwood12 1
@@ -27438,7 +27455,6 @@ poseyjt 1
 FAMUAce 1
 j_doukas 1
 bryanpready 1
-MineForSale 1
 Adamtheactivist 1
 Billionaire128 1
 360mediaX 1
@@ -28925,6 +28941,7 @@ AttWorldNews 1
 EINSoftwareNews 1
 maria_left 1
 whatslot 1
+SeattlesBanker 1
 ryanstewman 1
 TheGoldWaterUS 1
 rocmvv 1
@@ -29208,6 +29225,7 @@ BrettALeonardMS 1
 KevyKoolin 1
 CryptoMillenial 1
 CryptoshiChain 1
+Sergey13163250 1
 MattYurus 1
 xietafei 1
 mikerelentless 1
@@ -31510,7 +31528,6 @@ MPruitt101 1
 NJStateBar 1
 jheck1215 1
 jonsounders 1
-DuffnsunNancy 1
 stevesilberman 1
 christylemon 1
 RichardNolanr33 1
@@ -31616,7 +31633,6 @@ GerryInColorado 1
 llardito19 1
 TeamWearRed 1
 Coincrypto4 1
-BMouler 1
 emmabeIIa 1
 SylvainMetz56 1
 MikeOzanian 1
@@ -33996,7 +34012,6 @@ nsandhya029 1
 Lelugraves 1
 wvunger 1
 HoracioCoutino 1
-GeraldineKestn2 1
 Cre8veheart 1
 zapgotcha 1
 StrangeCPA 1
@@ -34499,6 +34514,7 @@ kgsmith11 1
 khennessey 1
 jeremyslevin 1
 RobertDurant7 1
+QuantusTecSol 1
 AshvinDe 1
 COBISorg 1
 vnkwinika 1
@@ -35104,6 +35120,7 @@ omp779211 1
 ShettyNiranjan 1
 CeeTee72 1
 AFPIndiana 1
+crookophobe 1
 westhamfootball 1
 TheBuffaloNews 1
 TonysAngle 1
@@ -35700,7 +35717,6 @@ NAI500 1
 EDGE_I 1
 JelleBrinkhuis 1
 iBladesi 1
-aebaca1 1
 powerofcryptooo 1
 inphilanthropy 1
 JWLindquist 1
@@ -39990,7 +40006,6 @@ Preqin 1
 CISFHQrs 1
 Brth_Of_TheCool 1
 EcoVinn 1
-JA3RATHOD 1
 cTrini23 1
 KathyLovesPizza 1
 hardrock_fracer 1
@@ -42932,6 +42947,7 @@ MidCenturyMoldy 1
 TheDailyHodl 1
 jason52886511 1
 ibaham 1
+mcxking1 1
 CryptoKami92 1
 ethanliim 1
 TiENPAYHK 1
@@ -46089,7 +46105,6 @@ vicsala_victor 1
 JasonHalle 1
 lalitadvani 1
 illuminatisilv1 1
-newstermer 1
 crazyfathead1 1
 DarioEpstein 1
 bestpricefs 1
@@ -50568,7 +50583,6 @@ cucumberwatch 1
 jswhofromwhere 1
 worldnewsanon 1
 Scot1andT 1
-SengoHector 1
 fortlaudygolf 1
 fakePOULTER 1
 oxfordvic 1
@@ -53860,6 +53874,7 @@ JacobMalamed 1
 kashishds 1
 MattMurph24 1
 CannaTradeToday 1
+ChuckMik 1
 osea65 1
 Gunsberger 1
 nico7860 1
@@ -60140,6 +60155,7 @@ Download24h1 1
 imchristiepitts 1
 justinpowellweb 1
 walidmrealtor 1
+_TopTechNews 1
 C2CballShowcase 1
 fullcycle 1
 BCNAnyc 1
@@ -61625,7 +61641,6 @@ _HeraldBusiness 1
 TheLifeCrusader 1
 webofslime 1
 Chrsteinbakken 1
-seaworth_ser 1
 TronWeekly 1
 tikiruss 1
 josethomasin 1
@@ -66706,7 +66721,6 @@ ar_debnath 1
 Flutschfingerr 1
 girishsnaik 1
 total_fan_forum 1
-Mohdfaour89 1
 gainerham 1
 gann_trader1 1
 filosedillo3 1

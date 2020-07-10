@@ -63,6 +63,7 @@ class Data_Processor:
                         'SONIC_BLOOM','Gawgeous_bloom','Lia_in_bloom','Real_Tess_Bloom']
 
 
+
     def weeklydatelist(self):
         start_year = int(self._S_m[:4])
         start_month = int(self._S_m[-2:])
@@ -124,34 +125,39 @@ class Data_Processor:
 
 
     def trend_analysis(self,keyword_list,polarity=0,count=1,ma=None):
-        # polarity=0 for pos, 1 for neg
         if not isinstance(polarity,Iterable):
             polarity=[polarity]
         data=self._M_data
         all_months=self.dlist
         app = self._subanalyze_sentiment(keyword_list, count)
         for pos in polarity:
+            if pos==2:
+                line=(np.array(app[0])+np.array(app[1]))/2
+            elif pos==3:
+                line=(np.array(app[0])-np.array(app[1]))/2
+            else:
+                line=np.array(app[pos])
             if ma:
                 supline=np.zeros(len(all_months))
                 subline=np.zeros(len(all_months))
                 average = np.zeros(len(all_months))
                 for i, m in enumerate(all_months):
                     if i == 0:
-                        average[i] =app[pos][i]
+                        average[i] =line[i]
                         supline[i]=average[i]
                         subline[i]=average[i]
                     elif i<ma:
-                        average[i]=np.mean(app[pos][:i+1])
-                        supline[i]=average[i]+np.std(app[pos][:i+1])
-                        subline[i]=average[i]-np.std(app[pos][:i+1])
+                        average[i]=np.mean(line[:i+1])
+                        supline[i]=average[i]+np.std(line[:i+1])
+                        subline[i]=average[i]-np.std(line[:i+1])
                     else:
-                        average[i]=np.mean(app[pos][i-ma+1:i+1])
-                        supline[i]=average[i]+np.std(app[pos][i-ma+1:i+1],ddof=1)
-                        subline[i]=average[i]-np.std(app[pos][i-ma+1:i+1],ddof=1)
+                        average[i]=np.mean(line[i-ma+1:i+1])
+                        supline[i]=average[i]+np.std(line[i-ma+1:i+1],ddof=1)
+                        subline[i]=average[i]-np.std(line[i-ma+1:i+1],ddof=1)
 
             matplotlib.rcParams['figure.dpi'] = 100
             fig, ax1 = plt.subplots(figsize=(7, 4))
-            ax1.plot(np.array(all_months), app[pos], color='C' + str(pos + 1))
+            ax1.plot(np.array(all_months), line, color='C' + str(pos + 1))
             if ma:
                 ax1.plot(np.array(all_months), average, 'plum')
                 ax1.plot(np.array(all_months), supline, 'b--')
@@ -177,13 +183,15 @@ class Data_Processor:
             plt.show()
 
     def show_tweets(self,month_list, keywords, count=1, threshold=2, unique=False):
+        if not isinstance(threshold,Iterable):
+            threshold=[threshold,threshold]
         result = []
         for m in month_list:
             idx = self.dlist.index(m)
             for item in self._M_data[idx]:
                 if sum([int(k in item['text'].lower()) for k in keywords]) >= count and (
-                        item['positive'] > threshold or item['negative'] < -threshold):
-                    result.append((item['text'], item['positive'], item['negative']))
+                        item['positive'] > threshold[0] or item['negative'] < -threshold[1]):
+                    result.append((item['text'], item['positive'], item['negative'],item['tweet_url']))
 
         return sorted(list(set(result)), key=lambda x: x[0]) if unique else sorted(result, key=lambda x: x[0])
 
@@ -485,3 +493,28 @@ def clean(Data):
                 Data[m][i] = C(Data[m][i])
 
     return Data
+
+def process(dirlists,start_month='2017-06',end_month='2020-05'):
+    result={}
+    for i,dirlist in enumerate(dirlists):
+        result[i]=Data_Processor(start_month=start_month,end_month=end_month,
+                  template=dirlist)
+        result[i].readdata()
+        result[i].readdata()
+        result[i].specifylang()
+        result[i].removenoise()
+        result[i].clean()
+    return result
+
+def percentage(tweetresult):
+    dict={}
+    l=len(tweetresult)
+    for item in tweetresult:
+        if (item[1],item[2]) not in dict.keys():
+            dict[(item[1],item[2])] = 1
+        else:
+            dict[(item[1], item[2])] += 1
+    items=dict.items()
+    items=sorted(items,key=lambda x:x[1],reverse=True)
+    res=[list(i)+[i[1]/l] for i in items]
+    return res

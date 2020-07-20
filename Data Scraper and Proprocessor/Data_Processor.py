@@ -124,7 +124,7 @@ class Data_Processor:
 
 
 
-    def trend_analysis(self,keyword_list,polarity=0,count=1,ma=None):
+    def trend_analysis(self,keyword_list,polarity=0,count=1,ma=None,simple=False,title=None,ynorm=False):
         if not isinstance(polarity,Iterable):
             polarity=[polarity]
         data=self._M_data
@@ -137,6 +137,8 @@ class Data_Processor:
                 line=(np.array(app[0])-np.array(app[1]))/2
             else:
                 line=np.array(app[pos])
+            if ynorm:
+                line=(line-np.min(line))/(np.max(line)-np.min(line))
             if ma:
                 supline=np.zeros(len(all_months))
                 subline=np.zeros(len(all_months))
@@ -157,11 +159,13 @@ class Data_Processor:
 
             matplotlib.rcParams['figure.dpi'] = 100
             fig, ax1 = plt.subplots(figsize=(7, 4))
-            ax1.plot(np.array(all_months), line, color='C' + str(pos + 1))
+            if not simple:
+                ax1.plot(np.array(all_months), line, color='C' + str(pos + 1))
             if ma:
                 ax1.plot(np.array(all_months), average, 'plum')
-                ax1.plot(np.array(all_months), supline, 'b--')
-                ax1.plot(np.array(all_months), subline, 'r--')
+                if not simple:
+                    ax1.plot(np.array(all_months), supline, 'b--')
+                    ax1.plot(np.array(all_months), subline, 'r--')
             ax1.set_xticks(np.arange(36))
             ax1.set_xticklabels([i if x % 3 == 0 else '' for x, i in enumerate(all_months)], rotation=45)
             ax1.set_ylabel('Sentiment Polarity')
@@ -179,7 +183,10 @@ class Data_Processor:
             ax2.bar(all_months, app[2], alpha=0.3)
             ax2.set_ylabel('Sentiment Frequency')
             extra = '...' if len(keyword_list) > 5 else ''
-            ax1.set_title('Keywords: ' + ', '.join(keyword_list[:5]) + extra)
+            if title:
+                ax1.set_title(title)
+            else:
+                ax1.set_title('Keywords: ' + ', '.join(keyword_list[:5]) + extra)
             plt.show()
 
     def show_tweets(self,month_list, keywords, count=1, threshold=2, unique=False):

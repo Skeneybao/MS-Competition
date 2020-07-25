@@ -124,12 +124,12 @@ class Data_Processor:
 
 
 
-    def trend_analysis(self,keyword_list,polarity=0,count=1,ma=None,simple=False,title=None,ynorm=False):
+    def trend_analysis(self,keyword_list,polarity=0,count=1,ma=None,simple=False,title=None,ynorm=False,weighted=False,reverse=False):
         if not isinstance(polarity,Iterable):
             polarity=[polarity]
         data=self._M_data
         all_months=self.dlist
-        app = self._subanalyze_sentiment(keyword_list, count)
+        app = self._subanalyze_sentiment(keyword_list, count,weighted=weighted)
         for pos in polarity:
             if pos==2:
                 line=(np.array(app[0])+np.array(app[1]))/2
@@ -137,8 +137,14 @@ class Data_Processor:
                 line=(np.array(app[0])-np.array(app[1]))/2
             else:
                 line=np.array(app[pos])
+                if pos==1:
+                    line-=1
+                if pos==0:
+                    line+=2
             if ynorm:
                 line=(line-np.min(line))/(np.max(line)-np.min(line))
+            if reverse:
+                line=1-line
             if ma:
                 supline=np.zeros(len(all_months))
                 subline=np.zeros(len(all_months))
@@ -214,11 +220,10 @@ class Data_Processor:
             for i in month:
                 if 'positive' not in i.keys():
                     break
-                if i['positive']>=3 and i['negative']<=-3:
-                    i['sentiment']=float('inf')
-                    continue
-                elif i['positive']>=max(3,-i['negative']*1.5):i['sentiment']=1
-                elif i['negative']<=min(-3,-i['positive']*1.5):i['sentiment']=-1
+                elif i['positive']>=-i['negative']*1.5:
+                    i['sentiment']=1
+                elif i['negative']<=-i['positive']*1.5:
+                    i['sentiment']=-1
                 else:i['sentiment']=0
             self._M_data.append(month)
         self._recalc()
@@ -349,7 +354,7 @@ class Data_Processor:
             self._M_data[i] = data
         self._recalc()
 
-    def _subanalyze_sentiment(self,keywords, count):  # data hierarchy: months*(text,score)*piece
+    def _subanalyze_sentiment(self,keywords, count,weighted=False):  # data hierarchy: months*(text,score)*piece
         data=self._M_data
         positivity = []
         negativity = []
@@ -359,9 +364,14 @@ class Data_Processor:
 
             for item in month_data:
                 if sum([int(k.lower() in item['text'].lower()) for k in keywords]) >= count:
-                    pos += item['positive']
-                    neg += item['negative']
-                    num += 1  # save number of tweets containing the filtered words with at least #count times
+                    if weighted:
+                        pos += item['positive']*(np.log(2+item['replies']))
+                        neg += item['negative']*(np.log(2+item['replies']))
+                        num += (np.log(2+item['replies']))
+                    else:
+                        pos += item['positive']
+                        neg += item['negative']
+                        num += 1  # save number of tweets containing the filtered words with at least #count times
 
             positivity.append(pos / max(1, num))
             negativity.append(neg / max(1, num))
